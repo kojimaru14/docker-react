@@ -3,4 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -f Dockerfile.dev .
+  - docker build -t lyugaloki/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run lyugaloki/docker-react npm run test -- -- coverage
