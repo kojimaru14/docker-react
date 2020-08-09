@@ -2,7 +2,7 @@
 
 ### Build Phase ###
 # tagged as "builder" phase
-FROM node:14.7-alpine as builder
+FROM node:14.7-alpine
 WORKDIR '/app'
 COPY package.json .
 RUN npm install
@@ -15,4 +15,4 @@ RUN npm run build
 FROM nginx
 EXPOSE 80
 # We want copy /app/build (created in "builder" phase) to the path for nginx
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
